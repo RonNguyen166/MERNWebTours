@@ -1,0 +1,31 @@
+@use "./scss/" as *;
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,500;8..144,600;8..144,700;8..144,800&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap");
+@import "~bootstrap/scss/bootstrap";
+.heading {
+  h2 {
+    font-size: 38px;
+    font-weight: 700;
+    padding: 0 0 1rem 0;
+    span {
+      color: $btn-color;
+    }
+  }
+  p {
+    padding: 0.5rem 0;
+    font-size: 18px;
+  }
+}
+body {
+  color: $main-color;
+  font-family: $font-family;
+}
+a {
+  text-decoration: none;
+  color: $main-color;
+}
+
+@media (hover: hover) {
+  a:hover {
+    color: $main-color;
+  }
+}

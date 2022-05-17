@@ -1,0 +1,18 @@
+@use "../../scss/" as *;
+.download-app {
+  padding: $padding-section;
+  .content {
+    background: $grey-color;
+    text-align: center;
+    padding: 80px 0;
+    border-radius: 1.5rem;
+    .btns {
+      btn:nth-child(1) {
+        margin-right: 25px;
+      }
+      img {
+        height: 50px;
+      }
+    }
+  }
+}

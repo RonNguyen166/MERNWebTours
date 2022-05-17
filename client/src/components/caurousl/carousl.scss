@@ -1,0 +1,57 @@
+@use "../../scss/" as *;
+
+.main-search {
+  padding: $padding-subsection;
+  .container-fluid {
+    position: relative;
+    .carousel-inner {
+      width: 100%;
+      height: 650px;
+      margin-top: 20px;
+      border-radius: $border-radius-banner;
+      .carousel-item {
+        height: 100%;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        .carousel-caption {
+          top: 30px;
+          h5 {
+            display: -webkit-box;
+            font-weight: 600;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          h1 {
+            font-weight: 800;
+            font-size: 58px;
+            letter-spacing: 5px;
+          }
+          .price {
+            font-size: 30px;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+    .carousel-control-prev,
+    .carousel-control-next {
+      align-items: flex-start;
+      top: 120px;
+    }
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      opacity: 0.9;
+    }
+    .carousel-indicators {
+      bottom: initial;
+      top: 220px;
+    }
+  }
+}

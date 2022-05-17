@@ -1,0 +1,122 @@
+@use "../../scss/" as *;
+
+.body-search {
+  position: absolute;
+  border-radius: 1.8rem;
+  padding: 30px 50px;
+  left: 50%;
+  bottom: -40px;
+  transform: translateX(-50%);
+  width: 80%;
+  z-index: 100;
+  color: #4d727e;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: $box-shadow-form;
+
+  .col-4 {
+    &:nth-child(2),
+    ~ .col-3 {
+      &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        height: 70%;
+        top: 50%;
+        transform: translateY(-50%);
+        left: -15px;
+        width: 1px;
+        background: $main-color;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .search-item {
+    position: relative;
+    height: 90px;
+    p {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      margin-bottom: 20px;
+      font-size: 17px;
+    }
+    .icon {
+      display: inline-block;
+      height: 15px;
+      width: 15px;
+      padding: 7px;
+      background: rgb(207, 207, 207);
+      border-radius: 50%;
+      margin-right: 10px;
+      color: #fff;
+    }
+    &:last-child {
+      .icon {
+        margin-right: 0;
+      }
+    }
+    input {
+      border: none;
+      background: transparent;
+      padding: 0 0 0 38px;
+      &:focus {
+        box-shadow: none;
+        display: block;
+        &:focus ~ .line {
+          visibility: visible;
+          transform: scaleX(1);
+        }
+      }
+    }
+    .line {
+      content: "";
+      display: block;
+      width: 80%;
+      margin-left: 37px;
+      height: 1px;
+      background: $main-color;
+      visibility: hidden;
+      transition: all 0.5s;
+      transform: scaleX(0);
+    }
+    .date {
+      position: absolute;
+      top: 85px;
+      left: -15px;
+      z-index: 2;
+    }
+    .from-guests {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 32px;
+
+      .btn1 {
+        .icon {
+          margin-right: 0;
+          background: transparent;
+          color: #000;
+        }
+      }
+    }
+    .btn1.sumbit {
+      display: flex;
+      margin: 0 auto;
+      border-radius: 0.5rem;
+      align-items: center;
+      justify-content: center;
+
+      width: 100%;
+      height: 100%;
+      background: $btn-color;
+      .icon {
+        background: transparent;
+        width: 25px;
+        height: 25px;
+      }
+    }
+    .text-search {
+      padding-left: 39px;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+@use "../../scss/" as *;
+.footer {
+  padding: $padding-subsection;
+  .heading {
+    h5 {
+      font-size: 17px;
+      font-weight: 600;
+    }
+    span {
+      color: $btn-color;
+    }
+    .link {
+      display: block;
+      text-decoration: none;
+      color: $main-color;
+      padding: 6px 0;
+    }
+  }
+}

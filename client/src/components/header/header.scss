@@ -1,0 +1,47 @@
+@use "../../scss/" as *;
+.header {
+  .btn-mgreen {
+    background: $btn-color;
+  }
+
+  .blockTop {
+    font-size: 13px;
+    .nav-link:nth-child(1) {
+      padding-left: 0;
+    }
+    .icon {
+      margin-right: 5px;
+    }
+    .nav-right {
+      .nav-link {
+        padding: 0px;
+      }
+    }
+  }
+
+  .blockBottom {
+    background: $main-color;
+    padding: 0.5rem 0;
+    .navbar {
+      a {
+        color: rgb(255, 255, 255);
+        font-size: $size-sub;
+      }
+      .navbar-brand {
+        font-size: 20px;
+      }
+    }
+    .btn {
+      color: #ffffff;
+      border: none;
+      padding: 0.5rem 1.8rem;
+      font-size: 1rem;
+      border-radius: 0.25rem;
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      &:hover {
+        color: #ffffff;
+      }
+    }
+  }
+}

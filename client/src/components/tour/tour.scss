@@ -1,0 +1,103 @@
+.col-md-3 {
+  margin: 15px 0;
+  position: relative;
+  height: 430px;
+  .card {
+    position: absolute;
+    width: calc(100% - 35px);
+    border-radius: 0.7rem;
+    border: none;
+    transition: all 0.3s ease-in-out;
+
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px,
+      rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    &:hover {
+      margin-top: -25px;
+    }
+    &:hover .btn-nav {
+      visibility: visible;
+      height: 50px;
+    }
+    .img-card {
+      padding: 18px 18px 0 18px;
+      img {
+        width: 100%;
+        height: 200px;
+        border-radius: 0.5rem;
+        object-fit: cover;
+      }
+    }
+    .content {
+      padding: 25px 18px;
+      .title {
+        font-weight: 700;
+      }
+      .sub-title {
+        margin: 16px 0 25px;
+        display: -webkit-box;
+        font-size: 16px;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .descr {
+        display: flex;
+        align-items: center;
+        .cus {
+          position: relative;
+          display: block;
+          .t-price {
+            position: absolute;
+            top: -20px;
+            right: 0;
+            font-size: 16px;
+            text-decoration: line-through;
+            color: #ffd36e;
+          }
+          .price-discount {
+            margin: 0;
+          }
+        }
+        .t-price {
+          margin: 0;
+        }
+        .location {
+          margin-right: 15px;
+        }
+        .location,
+        .price {
+          display: flex;
+          align-items: center;
+          line-height: 1;
+        }
+        .icon {
+          margin-right: 8px;
+          width: 12px;
+          height: 12px;
+          border-radius: 50px;
+          background: #4d727e;
+          color: #fff;
+          padding: 4px;
+        }
+      }
+    }
+    .btn-nav {
+      display: flex;
+      width: 100%;
+      height: 0;
+      background: #4d727e;
+      color: #fff;
+      justify-content: center;
+      align-items: center;
+      font-size: 17px;
+      font-weight: 500;
+      border-radius: 0 0 0.7rem 0.7rem;
+      transition: all 0.3s ease-in-out;
+      visibility: hidden;
+      .icon {
+        margin-left: 17px;
+      }
+    }
+  }
+}

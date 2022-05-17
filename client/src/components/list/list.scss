@@ -1,0 +1,15 @@
+@use "../../scss/" as *;
+.list {
+  padding: $padding-subsection;
+  .heading {
+    text-align: center;
+    padding: 0 400px;
+  }
+
+  .wrap {
+    margin: 60px 0 0 50px;
+    .row {
+      align-items: center;
+    }
+  }
+}
