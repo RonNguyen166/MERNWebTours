@@ -55,7 +55,7 @@ export const getAllUsers = catchAsync(async (req, res, next) => {
     .sort()
     .limitFields()
     .paginate();
-  const users = await features.obj;
+  const users = await features.query;
   res.status(200).json({
     status: "success",
     data: users,

@@ -20,6 +20,7 @@ import bookingRouter from "./routes/bookingRoutes";
 import tourRouter from "./routes/tourRoutes";
 import userRouter from "./routes/userRoutes";
 import reviewRouter from "./routes/reviewRoutes";
+import categoryRouter from "./routes/categoryRoutes";
 
 const app = express();
 
@@ -71,6 +72,7 @@ app.use("/v1/users", userRouter);
 app.use("/v1/reviews", reviewRouter);
 app.use("/v1/bookings", bookingRouter);
 app.use("/v1/auth", authRouter);
+app.use("/v1/category", categoryRouter);
 
 // catch 404 and forward to error handler
 app.use("*", (req, res, next) => {

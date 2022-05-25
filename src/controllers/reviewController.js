@@ -26,7 +26,7 @@ export const getAllReviews = catchAsync(async (req, res, next) => {
     .sort()
     .limitFields()
     .paginate();
-  const reviews = await features.obj;
+  const reviews = await features.query;
   res.status(200).json({
     status: "success",
     results: reviews.length,

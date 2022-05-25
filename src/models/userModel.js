@@ -21,6 +21,11 @@ const userSchema = mongoose.Schema({
     type: String,
     require: true,
     unique: true,
+    validate(value) {
+      if (value.match(/\s/) !== null) {
+        throw new Error("The value has blank spaces");
+      }
+    },
   },
   photo: {
     type: String,

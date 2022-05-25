@@ -1,27 +1,29 @@
+import axios from "axios";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { SearchContext } from "../../context/SearchContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as icons from "@fortawesome/free-solid-svg-icons";
+import { Dropdown } from "react-bootstrap";
 
 import "./header.scss";
 
 const Header = ({ type }) => {
-  const [destination, setDestination] = useState("");
-  const [openDate, setOpenDate] = useState(false);
-  const [date, setDates] = useState(Date.now());
-  // const [openLocation, setOpenLocation] = useState(false);
-  const [startLocation, setStartLocation] = useState("");
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
-  const { dispatch } = useContext(SearchContext);
-  const handleSearch = () => {
-    dispatch({
-      type: "NEW_SEARCH",
-      payload: { destination, date, startLocation },
-    });
-    navigate("/tours", { state: { destination, date, startLocation } });
+  const { user, loading, error, dispatch } = useContext(AuthContext);
+
+  const handleClickLogout = async (e) => {
+    e.preventDefault();
+    dispatch({ type: "LOGOUT" });
+    try {
+      const res = await axios.get("/auth/logout");
+      console.log(res.data.data);
+      if (res.data.status === "success") {
+        navigate("/");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div className="header">
@@ -71,9 +73,6 @@ const Header = ({ type }) => {
                       />
                       Trung tâm trợ giúp
                     </Link>
-                    {/* <Link className="nav-link" to="/">
-                      Pricing
-                    </Link> */}
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link" to="/">
@@ -141,10 +140,39 @@ const Header = ({ type }) => {
                   </Link>
                 </li>
               </ul>
-              {!user && (
+              {(!user && (
                 <div>
-                  <btn className="btn">Đăng Nhập</btn>
-                  <btn className="btn btn-mgreen">Đăng Kí</btn>
+                  <Link className="btn" to="/login">
+                    Đăng Nhập
+                  </Link>
+                  <Link className="btn btn-mgreen" to="/register">
+                    Đăng Kí
+                  </Link>
+                </div>
+              )) || (
+                <div className="profile">
+                  <Dropdown>
+                    <Dropdown.Toggle
+                      variant="success"
+                      id="dropdown-basic"
+                      className="btn-drop"
+                    >
+                      <img
+                        src={"./img/users/" + user.photo}
+                        alt=""
+                        className="u-photo"
+                      />
+                      <span className="u-name">{user.username}</span>
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu className="menu">
+                      <Link to="/">Cài đặt thông tin</Link>
+                      <Link to="/">Tours đã đặt</Link>
+                      <Link to="/" onClick={handleClickLogout}>
+                        Đăng xuất
+                      </Link>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </div>
               )}
             </div>

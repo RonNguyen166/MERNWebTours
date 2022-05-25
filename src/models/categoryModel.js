@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-const CategorySchema = mongoose.Schema({
+import slugify from "slugify";
+const categorySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -11,8 +12,19 @@ const CategorySchema = mongoose.Schema({
   slug: String,
   image: {
     type: String,
+    required: true,
   },
 });
 
-const Category = mongoose.model("Category", CategorySchema);
+categorySchema.pre("save", function (next) {
+  this.slug = slugify(this.name, {
+    lower: true,
+    upper: true,
+    locale: "vi",
+    trim: true,
+  });
+  next();
+});
+
+const Category = mongoose.model("Categories", categorySchema);
 export default Category;

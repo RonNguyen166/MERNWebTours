@@ -3,31 +3,28 @@
 .body-search {
   position: absolute;
   border-radius: 1.8rem;
-  padding: 30px 50px;
+  padding: 30px 36px;
   left: 50%;
-  bottom: -40px;
+  bottom: -70px;
   transform: translateX(-50%);
-  width: 80%;
+  width: 87%;
   z-index: 100;
   color: #4d727e;
   background: rgba(255, 255, 255, 0.98);
   box-shadow: $box-shadow-form;
 
-  .col-4 {
-    &:nth-child(2),
-    ~ .col-3 {
-      &:before {
-        content: "";
-        position: absolute;
-        display: block;
-        height: 70%;
-        top: 50%;
-        transform: translateY(-50%);
-        left: -15px;
-        width: 1px;
-        background: $main-color;
-        border-radius: 50%;
-      }
+  .col-3 {
+    &:after {
+      content: "";
+      position: absolute;
+      display: block;
+      height: 85%;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 15px;
+      width: 2px;
+      background: $main-color;
+      border-radius: 50%;
     }
   }
 
@@ -69,6 +66,20 @@
         }
       }
     }
+    .date-picker {
+      color: $main-color;
+      &:focus-visible {
+        outline: none;
+      }
+    }
+    .react-datepicker__input-container::before {
+      content: "\f107";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 600;
+      display: block;
+      position: absolute;
+      right: 30px;
+    }
     .line {
       content: "";
       display: block;
@@ -89,7 +100,7 @@
     .from-guests {
       display: flex;
       justify-content: space-between;
-      padding: 0 32px;
+      padding: 0 20px;
 
       .btn1 {
         .icon {

@@ -14,7 +14,7 @@ const getAllBookings = catchAsync(async (req, res, next) => {
     .limitFields()
     .paginate();
 
-  const bookings = features.obj;
+  const bookings = features.query;
 
   res.status(200).json({
     status: "success",

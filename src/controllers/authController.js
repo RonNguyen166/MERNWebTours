@@ -27,16 +27,19 @@ const createSendCookie = (token, user, statusCode, req, res) => {
 
 const register = catchAsync(async (req, res, next) => {
   const user = await User.create(req.body);
-  const tokens = await token.generateAuthTokens(user);
-  // sendVerificationEmail()
+  const tokens = (await token.ge) / nerateAuthTokens(user);
+  // sendVerificationEmail();
   createSendCookie(tokens.refresh.token, user, 201, req, res);
 });
 
 const login = catchAsync(async (req, res, next) => {
-  const { email, password } = req.body;
-  if (!email || !password)
+  const { login, password } = req.body;
+  if (!login || !password)
     return next(new ApiError("Please provide email and password", 400));
-  const user = await User.findOne({ email }).select("+password");
+
+  const user = await User.findOne(
+    login.match(/@/) ? { email: login } : { username: login }
+  ).select("+password");
   if (!user || !(await user.correctPassword(password, user.password)))
     return next(new ApiError("Incorrect email or password", 401));
   // if (!user.email)

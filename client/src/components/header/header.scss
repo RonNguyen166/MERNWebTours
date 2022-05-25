@@ -43,5 +43,50 @@
         color: #ffffff;
       }
     }
+    .profile {
+      .btn-drop {
+        background: transparent;
+        &:focus {
+          box-shadow: none;
+        }
+      }
+      .menu {
+        position: absolute;
+        background: $main-color;
+        box-shadow: $box-shadow-card;
+        border: none;
+        width: 200px;
+        padding: 1.5rem;
+        right: 0px;
+        z-index: 50;
+        margin-top: 10px;
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transition: visibility opacity 0.2s ease-in-out;
+        a {
+          display: block;
+          &:not(:first-child) {
+            margin-top: 10px;
+          }
+        }
+      }
+      .dropdown .show {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+      }
+      &:focus {
+        box-shadow: none;
+      }
+      .u-photo {
+        width: 35px;
+        height: 35px;
+        object-fit: cover;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 10px;
+      }
+    }
   }
 }

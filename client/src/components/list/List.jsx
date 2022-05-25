@@ -3,7 +3,8 @@ import useFetch from "../../hooks/useFetch";
 import Tour from "../tour/Tour";
 
 const List = () => {
-  const { data, loading, error } = useFetch("/tours?limit=8&sort=createdAt");
+  const { result, loading, error } = useFetch("/tours?limit=8&sort=createdAt");
+
   return (
     <div className="list">
       <div className="container">
@@ -22,7 +23,7 @@ const List = () => {
             </div>
             <div className="wrap">
               <div className="row">
-                {data.map((el) => (
+                {result.data?.map((el) => (
                   <Tour item={el} key={el.id} />
                 ))}
               </div>

@@ -1,6 +1,8 @@
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import useFetch from "../../hooks/useFetch";
 import "./categories.scss";
 const Categories = () => {
+  const { result, loading, error } = useFetch("/category");
   return (
     <div className="categories">
       <div className="container">
@@ -12,7 +14,7 @@ const Categories = () => {
         <Splide
           options={{
             rewind: true,
-            gap: "3em",
+            gap: "3.5em",
             autoWidth: true,
             pagination: false,
           }}
@@ -20,38 +22,14 @@ const Categories = () => {
           className="splide"
           tap="section"
         >
-          <SplideSlide className="slide">
-            <img src="./imgCover/bien.jpg" alt="" />
-            <h5>Biển</h5>
-          </SplideSlide>
-          <SplideSlide className="slide">
-            <img src="./imgCover/bien.jpg" alt="" />
-            <h5>Chùa</h5>
-          </SplideSlide>
-          <SplideSlide className="slide">
-            <img src="./imgCover/bien.jpg" alt="" />
-            <h5>Chùa</h5>
-          </SplideSlide>
-          <SplideSlide className="slide">
-            <img src="./imgCover/bien.jpg" alt="" />
-            <h5>Chùa</h5>
-          </SplideSlide>
-          <SplideSlide className="slide">
-            <img src="./imgCover/bien.jpg" alt="" />
-            <h5>Chùa</h5>
-          </SplideSlide>
-          <SplideSlide className="slide">
-            <img src="./imgCover/bien.jpg" alt="" />
-            <h5>Chùa</h5>
-          </SplideSlide>
-          <SplideSlide className="slide">
-            <img src="./imgCover/bien.jpg" alt="" />
-            <h5>Chùa</h5>
-          </SplideSlide>
-          <SplideSlide className="slide">
-            <img src="./imgCover/bien.jpg" alt="" />
-            <h5>Chùa</h5>
-          </SplideSlide>
+          {result.data?.map((item) => {
+            return (
+              <SplideSlide key={item._id} className="slide">
+                <img src={"./img/categories/" + item.image} alt="" />
+                <h5>{item.name}</h5>
+              </SplideSlide>
+            );
+          })}
         </Splide>
       </div>
     </div>

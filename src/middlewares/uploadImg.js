@@ -49,3 +49,16 @@ export const resizeUserPhoto = catchAsync(async (req, res, next) => {
     .toFile(`client/public/img/users/${req.file.filename}`);
   next();
 });
+
+export const uploadCategoryImages = upload.single("image");
+
+export const resizeCategoryImages = catchAsync(async (req, res, next) => {
+  if (!req.file) return next();
+  req.file.filename = `category-${Date.now()}.jpeg`;
+  await sharp(req.file.buffer)
+    .resize(500, 500)
+    .toFormat("jpeg")
+    .jpeg({ quality: 90 })
+    .toFile(`client/public/img/categories/${req.file.filename}`);
+  next();
+});

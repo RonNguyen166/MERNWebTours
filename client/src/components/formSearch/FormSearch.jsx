@@ -1,41 +1,48 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { DateRange } from "react-date-range";
+import DatePicker from "react-datepicker";
+
 import * as icons from "@fortawesome/free-solid-svg-icons";
-
-import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
-
+import "react-datepicker/dist/react-datepicker.css";
 import "./formSearch.scss";
 
 const FormSearch = () => {
+  const [departure, setDeparture] = useState("");
   const [destination, setDestination] = useState("");
-  const [openDate, setOpenDate] = useState(false);
   const [guests, setGuests] = useState(2);
-  const [dates, setDates] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
+  const [startDate, setStartDate] = useState(new Date());
   // const [openLocation, setOpenLocation] = useState(false);
   const navigate = useNavigate();
   const { dispatch } = useContext(SearchContext);
   const handleSearch = () => {
     dispatch({
       type: "NEW_SEARCH",
-      payload: { destination, dates, guests },
+      payload: { destination, startDate, guests },
     });
-    navigate("/tours", { state: { destination, dates, guests } });
+    navigate("/tours", {
+      state: { departure, destination, startDate, guests },
+    });
   };
   return (
     <div className="body-search">
       <div className="row">
-        <div className="col-4 search-item">
+        <div className="col-3 search-item">
+          <p>
+            <FontAwesomeIcon className="icon" icon={icons.faLocationDot} />
+            Departure
+          </p>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Điểm khởi hành?"
+            onChange={(departure) => setDeparture(departure)}
+          />
+          <div className="line"></div>
+        </div>
+        <div className="col-3 search-item">
           <p>
             <FontAwesomeIcon className="icon" icon={icons.faLocationDot} />
             Location
@@ -44,35 +51,24 @@ const FormSearch = () => {
             type="text"
             className="form-control"
             placeholder="Bạn muốn đi đâu?"
+            onChange={(destination) => setDestination(destination)}
           />
           <div className="line"></div>
         </div>
-        <div className="col-4 search-item">
+        <div className="col-3 search-item">
           <p>
             <FontAwesomeIcon className="icon " icon={icons.faCalendarDays} />
             Date
           </p>
-          <span onClick={() => setOpenDate(!openDate)} className="text-search">
-            {`${format(dates[0].startDate, "MM/dd/yyyy")} `}{" "}
-            <FontAwesomeIcon icon={icons.faArrowsLeftRight} />{" "}
-            {` ${format(dates[0].endDate, "MM/dd/yyyy")}`}{" "}
-            <FontAwesomeIcon
-              style={{ marginLeft: 18 }}
-              icon={icons.faAngleDown}
-            />
-          </span>
-          {openDate && (
-            <DateRange
-              editableDateInputs={true}
-              onChange={(item) => setDates([item.selection])}
-              moveRangeOnFirstSelection={false}
-              ranges={dates}
-              className="date"
-              minDate={new Date()}
-            />
-          )}
+
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            className="date-picker"
+            dateFormat="dd/MM/yyyy"
+          />
         </div>
-        <div className="col-3 search-item">
+        <div className="col-2 search-item">
           <p>
             <FontAwesomeIcon className="icon" icon={icons.faUserPlus} />
             Guests
@@ -87,7 +83,7 @@ const FormSearch = () => {
             </btn>
             <div className="form-add-people">
               <span className="quatity">{guests}</span>
-              <span> guests</span>
+              {/* <span> guests</span> */}
             </div>
             <btn className="btn1">
               <FontAwesomeIcon
@@ -99,7 +95,7 @@ const FormSearch = () => {
           </div>
         </div>
         <div className="col-1 search-item">
-          <btn className="btn1 sumbit" onClick={handleSearch}>
+          <btn type="submit" className="btn1 sumbit" onClick={handleSearch}>
             <FontAwesomeIcon className="icon" icon={icons.faMagnifyingGlass} />
           </btn>
         </div>

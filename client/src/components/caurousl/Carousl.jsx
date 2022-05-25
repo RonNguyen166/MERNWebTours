@@ -3,7 +3,7 @@ import useFetch from "../../hooks/useFetch";
 import FormSearch from "../formSearch/FormSearch";
 
 const Carousl = () => {
-  const { data, loading, error } = useFetch("/tours?limit=4&sort=createdAt");
+  const { result, loading, error } = useFetch("/tours/tour-4-cheap");
   return (
     <div className="main-search">
       <div className="container">
@@ -47,7 +47,7 @@ const Carousl = () => {
                 ></btn>
               </div>
               <div className="carousel-inner">
-                {data.map((item, i) => {
+                {result.data?.map((item, i) => {
                   return (
                     <div
                       key={i}

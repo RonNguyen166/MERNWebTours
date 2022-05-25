@@ -3,20 +3,13 @@ import ApiError from "../utils/ApiError";
 import APIFeatures from "../utils/APIFeatures";
 import catchAsync from "../utils/catchAsync";
 
-export const aliasTopTours = (req, res, next) => {
-  req.query.limit = "5";
-  req.query.sort = "-ratingsAverage,price";
-  req.query.fields = "name,price,ratingsAverage,summary,difficulty";
-  next();
-};
-
 export const getAllTours = catchAsync(async (req, res, next) => {
-  const features = new APIFeatures(Tour, req.query)
+  const features = new APIFeatures(Tour.find(), req.query)
     .filter()
     .sort()
     .limitFields()
     .paginate();
-  const tours = await features.obj;
+  const tours = await features.query;
   res.status(200).json({
     status: "success",
     results: tours.length,
@@ -67,7 +60,6 @@ export const updateTour = catchAsync(async (req, res, next) => {
 
 export const deleteTour = catchAsync(async (req, res, next) => {
   const tour = await Tour.findByIdAndDelete(req.params.id);
-  console.log(tour);
   if (!tour) return next(new ApiError("No tours found with this ID.", 404));
   res.status(200).json({
     status: "success",
@@ -75,12 +67,19 @@ export const deleteTour = catchAsync(async (req, res, next) => {
   });
 });
 
-export const topTours = (req, res, next) => {
-  req.query.limit = "10";
+export const aliasTopTours = (req, res, next) => {
+  req.query.limit = "4";
   req.query.sort = "-ratingsAverage,price";
-  req.query.fields = "name,price,ratingsAverage,summary,difficulty";
+  req.query.fields = "name,price,ratingsAverage,summary,difficulty,images";
   next();
 };
+
+// export const topTours = (req, res, next) => {
+//   req.query.limit = "10";
+//   req.query.sort = "-ratingsAverage,price";
+//   req.query.fields = "name,price,ratingsAverage,summary,difficulty";
+//   next();
+// };
 
 export const getTourStats = catchAsync(async (req, res, next) => {
   const stats = await Tour.aggregate([
