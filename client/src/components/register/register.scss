@@ -1,3 +1,11 @@
 form.sign-in-form {
   z-index: 2;
 }
+
+.fieldError{
+  color:rgba(170, 36, 36, 0.8);
+  font-size: 14px;
+  display: block;
+  width: 100%;
+  padding-left: 60px;
+}

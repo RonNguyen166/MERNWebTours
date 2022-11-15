@@ -10,7 +10,7 @@ import "./login.scss";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
-    login: undefined,
+    email: undefined,
     password: undefined,
   });
 
@@ -26,10 +26,11 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
+      console.log({ credentials })
       const res = await axios.post("/auth/login", credentials);
-      console.log(res.data.data);
-      if (res.data.status === "success") {
-        dispatch({ type: "LOGIN_SUCCESS", payload: res.data.data });
+      console.log(res);
+      if (res.data.success) {
+        dispatch({ type: "LOGIN_SUCCESS", payload: res.data.result.user });
         navigate("/");
       }
       alert(res.data.message);
@@ -44,8 +45,8 @@ const Login = () => {
         <i className="fas fa-user"></i>
         <input
           type="text"
-          placeholder="Username or Email"
-          name="login"
+          placeholder="Email"
+          name="email"
           onChange={handleChange}
         />
       </div>
